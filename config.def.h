@@ -75,13 +75,14 @@ ResourcePref resources[] = {
 		{ "selected.background",         STRING,  &selbgcolor },
 		{ "selected.border",     STRING,  &selbordercolor },
 		{ "selected.foreground",         STRING,  &selfgcolor },
-		{ "border.px",          	INTEGER, &borderpx },
+		{ "borderpx",          	INTEGER, &borderpx },
 		{ "snap",          		INTEGER, &snap },
 		{ "showbar",          	INTEGER, &showbar },
 		{ "topbar",          	INTEGER, &topbar },
 		{ "nmaster",          	INTEGER, &nmaster },
 		{ "resizehints",       	INTEGER, &resizehints },
 		{ "mfact",      	 	FLOAT,   &mfact },
+		{ "gappx",      	 	INTEGER,   &gappx },
 };
 
 static const Key keys[] = {
