@@ -33,6 +33,7 @@
 #include <sys/wait.h>
 #include <X11/cursorfont.h>
 #include <X11/keysym.h>
+#include <X11/XF86keysym.h>
 #include <X11/Xatom.h>
 #include <X11/Xlib.h>
 #include <X11/Xproto.h>
@@ -122,7 +123,7 @@ struct Monitor {
 	int by;               /* bar geometry */
 	int mx, my, mw, mh;   /* screen size */
 	int wx, wy, ww, wh;   /* window area  */
-	int gappx;            /* gaps between windows */
+	int gappx, default_gappx;            /* gaps between windows */
 	unsigned int seltags;
 	unsigned int sellt;
 	unsigned int tagset[2];
@@ -1857,7 +1858,7 @@ setgaps(const Arg *arg)
 {
 	if ((arg->i == 0) || (selmon->gappx + arg->i < 0))
         // TODO: set gappx to default
-		selmon->gappx = 13;
+		selmon->gappx = default_gappx;
 	else
 		selmon->gappx += arg->i;
 	arrange(selmon);
