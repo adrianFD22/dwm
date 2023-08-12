@@ -1856,7 +1856,8 @@ void
 setgaps(const Arg *arg)
 {
 	if ((arg->i == 0) || (selmon->gappx + arg->i < 0))
-		selmon->gappx = 0;
+        // TODO: set gappx to default
+		selmon->gappx = 13;
 	else
 		selmon->gappx += arg->i;
 	arrange(selmon);
