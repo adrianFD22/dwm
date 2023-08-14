@@ -66,7 +66,6 @@ static const char *suspendcmd[]  = { "systemctl", "suspend", NULL};
 static const char *browsercmd[]  = { "qutebrowser", NULL};
 static const char *incvolumecmd[]  = { "pulsemixer", "--change-volume", "+5", "--max-volume", "100", NULL};
 static const char *decvolumecmd[]  = { "pulsemixer", "--change-volume", "-5", "--max-volume", "100", NULL};
-static const char *togglemuteaudiocmd[]  = { "pactl", "set-sink-mute", "@DEFAULT_SINK@", "toggle", NULL};
 static const char *togglemutemiccmd[]  = { "pactl", "set-source-mute", "@DEFAULT_SOURCE@", "toggle", NULL};
 static const char *brupcmd[] = { "xbacklight", "-inc", "10", NULL };
 static const char *brdowncmd[] = { "xbacklight", "-dec", "10", NULL };
@@ -102,11 +101,11 @@ ResourcePref resources[] = {
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
-	{ 0,                       XF86XK_MonBrightnessUp,      spawn,      {.v = brupcmd } },
-	{ 0,                       XF86XK_MonBrightnessDown,    spawn,      {.v = brdowncmd } },
-	{ 0,                       XF86XK_AudioRaiseVolume,     spawn,      {.v = incvolumecmd } },
-	{ 0,                       XF86XK_AudioLowerVolume,     spawn,      {.v = decvolumecmd } },
-	{ 0,                       XF86XK_AudioMute,            spawn,      {.v = togglemuteaudiocmd } },
+	{ 0,                       XF86XK_MonBrightnessUp,      spawn,      SHCMD( "xbacklight -inc 5 && kill -38 $(pidof dwmblocks)" )},
+	{ 0,                       XF86XK_MonBrightnessDown,    spawn,      SHCMD( "xbacklight -dec 5 && kill -38 $(pidof dwmblocks)" )},
+	{ 0,                       XF86XK_AudioRaiseVolume,     spawn,      SHCMD( "pulsemixer --change-volume +5 --max-volume 100 && kill -39 $(pidof dwmblocks) ") },
+	{ 0,                       XF86XK_AudioLowerVolume,     spawn,      SHCMD( "pulsemixer --change-volume -5 --max-volume 100 && kill -39 $(pidof dwmblocks) ") },
+	{ 0,                       XF86XK_AudioMute,            spawn,      SHCMD( "pactl set-sink-mute @DEFAULT_SINK@ toggle && kill -39 $(pidof dwmblocks) ") },
 	{ 0,                       XF86XK_AudioMicMute,         spawn,      {.v = togglemutemiccmd } },
 	{ 0,                       XF86XK_AudioPlay,            spawn,      {.v = toggleplaycmd } },
 	{ 0,                       XF86XK_AudioPrev,            spawn,      {.v = previousmediacmd } },
