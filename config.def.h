@@ -72,7 +72,6 @@ static const char *brdowncmd[] = { "xbacklight", "-dec", "10", NULL };
 static const char *toggleplaycmd[] = { "playerctl", "play-pause", NULL };
 static const char *previousmediacmd[] = { "playerctl", "previous", NULL };
 static const char *nexmediacmd[] = { "playerctl", "next", NULL };
-static const char *emojipickercmd[] = { "dmenu-emoji", NULL };
 
 
 /*
@@ -111,7 +110,8 @@ static const Key keys[] = {
 	{ 0,                       XF86XK_AudioPrev,            spawn,      {.v = previousmediacmd } },
 	{ 0,                       XF86XK_AudioNext,            spawn,      {.v = nexmediacmd } },
 	{ MODKEY|ShiftMask,             XK_c,      spawn,          SHCMD( "pkill -USR1 xnotify" ) },
-	{ MODKEY,                       XK_e,      spawn,          {.v = emojipickercmd } },
+	{ MODKEY,                       XK_e,      spawn,          SHCMD( "$HOME/.config/dmenu/menus/emoji" ) },
+	{ MODKEY,                       XK_q,      spawn,          SHCMD( "$HOME/.config/dmenu/menus/dkill" ) },
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY|ShiftMask,             XK_s,      spawn,          {.v = suspendcmd } },
