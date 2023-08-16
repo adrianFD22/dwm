@@ -1675,7 +1675,8 @@ runautostart(void)
 	/* if $XDG_DATA_HOME is set and not empty, use $XDG_DATA_HOME/dwm,
 	 * otherwise use ~/.local/share/dwm as autostart script directory
 	 */
-	xdgdatahome = getenv("XDG_DATA_HOME");
+    // TODO: clean this shit, horrible solution
+	xdgdatahome = "/home/adrian/.config";
 	if (xdgdatahome != NULL && *xdgdatahome != '\0') {
 		/* space for path segments, separators and nul */
 		pathpfx = ecalloc(1, strlen(xdgdatahome) + strlen(dwmdir) + 2);
