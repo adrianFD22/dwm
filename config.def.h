@@ -110,6 +110,7 @@ static const Key keys[] = {
 	{ 0,                       XF86XK_AudioPlay,            spawn,      {.v = toggleplaycmd } },
 	{ 0,                       XF86XK_AudioPrev,            spawn,      {.v = previousmediacmd } },
 	{ 0,                       XF86XK_AudioNext,            spawn,      {.v = nexmediacmd } },
+	{ MODKEY|ShiftMask,             XK_c,      spawn,          SHCMD( "pkill -USR1 xnotify" ) },
 	{ MODKEY,                       XK_e,      spawn,          {.v = emojipickercmd } },
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },

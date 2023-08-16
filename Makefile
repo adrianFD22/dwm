@@ -27,7 +27,7 @@ dwm: ${OBJ}
 
 clean:
 	rm -f dwm ${OBJ} dwm-${VERSION}.tar.gz
-	[ -f "config.h" ] && rm config.h
+	if [ -f "config.h" ]; then rm config.h; fi
 
 dist: clean
 	mkdir -p dwm-${VERSION}
