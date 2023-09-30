@@ -6,6 +6,7 @@ static unsigned int gappx, default_gappx     = 5;        /* gaps between windows
 static unsigned int snap      = 32;       /* snap pixel */
 static int showbar            = 1;        /* 0 means no bar */
 static int topbar             = 1;        /* 0 means bottom bar */
+//static char font[]            = "JetBrains-Mono-Nerd-Font-Complete:size=10";
 static char font[]            = "monospace:size=10";
 static char dmenufont[]       = "monospace:size=10";
 static const char *fonts[]          = { font };
@@ -61,18 +62,6 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
-static const char *termcmd[]  = { "st", NULL };
-static const char *suspendcmd[]  = { "systemctl", "suspend", NULL};
-static const char *browsercmd[]  = { "qutebrowser", NULL};
-static const char *incvolumecmd[]  = { "pulsemixer", "--change-volume", "+5", "--max-volume", "100", NULL};
-static const char *decvolumecmd[]  = { "pulsemixer", "--change-volume", "-5", "--max-volume", "100", NULL};
-static const char *togglemutemiccmd[]  = { "pactl", "set-source-mute", "@DEFAULT_SOURCE@", "toggle", NULL};
-static const char *brupcmd[] = { "xbacklight", "-inc", "10", NULL };
-static const char *brdowncmd[] = { "xbacklight", "-dec", "10", NULL };
-static const char *toggleplaycmd[] = { "playerctl", "play-pause", NULL };
-static const char *previousmediacmd[] = { "playerctl", "previous", NULL };
-static const char *nexmediacmd[] = { "playerctl", "next", NULL };
-
 
 /*
  * Xresources preferences to load at startup
@@ -105,17 +94,19 @@ static const Key keys[] = {
 	{ 0,                       XF86XK_AudioRaiseVolume,     spawn,      SHCMD( "pulsemixer --change-volume +5 --max-volume 100 && kill -39 $(pidof dwmblocks) ") },
 	{ 0,                       XF86XK_AudioLowerVolume,     spawn,      SHCMD( "pulsemixer --change-volume -5 --max-volume 100 && kill -39 $(pidof dwmblocks) ") },
 	{ 0,                       XF86XK_AudioMute,            spawn,      SHCMD( "pactl set-sink-mute @DEFAULT_SINK@ toggle && kill -39 $(pidof dwmblocks) ") },
-	{ 0,                       XF86XK_AudioMicMute,         spawn,      {.v = togglemutemiccmd } },
-	{ 0,                       XF86XK_AudioPlay,            spawn,      {.v = toggleplaycmd } },
-	{ 0,                       XF86XK_AudioPrev,            spawn,      {.v = previousmediacmd } },
-	{ 0,                       XF86XK_AudioNext,            spawn,      {.v = nexmediacmd } },
+	{ 0,                       XF86XK_AudioMicMute,         spawn,      SHCMD( "pactl set-source-mute @DEFAULT_SOURCE@ toggle" ) },
+	{ 0,                       XF86XK_AudioPlay,            spawn,      SHCMD( "playerctl play-pause" ) },
+	{ 0,                       XF86XK_AudioPrev,            spawn,      SHCMD( "playerctl previous" ) },
+	{ 0,                       XF86XK_AudioNext,            spawn,      SHCMD( "playerctl next" ) },
 	{ MODKEY|ShiftMask,             XK_c,      spawn,          SHCMD( "pkill -USR1 xnotify" ) },
-	{ MODKEY,                       XK_e,      spawn,          SHCMD( "$HOME/.config/dmenu/menus/emoji" ) },
-	{ MODKEY,                       XK_q,      spawn,          SHCMD( "$HOME/.config/dmenu/menus/dkill" ) },
+	{ MODKEY,                       XK_e,      spawn,          SHCMD( "dmenu-emoji" ) },
+	{ MODKEY,                       XK_q,      spawn,          SHCMD( "dmenu-pkill" ) },
+	{ MODKEY,                       XK_b,      spawn,          SHCMD( "dmenu-bluetooth" ) },
+	{ MODKEY,                       XK_n,      spawn,          SHCMD( "dmenu-networkmanager" ) },
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
-	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
-	{ MODKEY|ShiftMask,             XK_s,      spawn,          {.v = suspendcmd } },
-	{ MODKEY,                       XK_w,      spawn,          {.v = browsercmd } },
+	{ MODKEY,                       XK_Return, spawn,          SHCMD( "st" ) },
+	{ MODKEY|ShiftMask,             XK_s,      spawn,          SHCMD( "systemctl suspend" ) },
+	{ MODKEY,                       XK_w,      spawn,          SHCMD( "qutebrowser" ) },
 	//{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
@@ -178,7 +169,7 @@ static const Button buttons[] = {
 	/* click                event mask      button          function        argument */
 	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
 	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
-	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
+	//{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
 	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
 	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
