@@ -6,7 +6,6 @@ static unsigned int gappx, default_gappx     = 5;        /* gaps between windows
 static unsigned int snap      = 32;       /* snap pixel */
 static int showbar            = 1;        /* 0 means no bar */
 static int topbar             = 1;        /* 0 means bottom bar */
-//static char font[]            = "JetBrains-Mono-Nerd-Font-Complete:size=10";
 static char font[]            = "monospace:size=10";
 static char dmenufont[]       = "monospace:size=10";
 static const char *fonts[]          = { font };
