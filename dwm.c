@@ -251,8 +251,8 @@ static void unmapnotify(XEvent *e);
 static void updatecurrentdesktop(void);
 static void updatebarpos(Monitor *m);
 static void updatebars(void);
-static void updatecurrentdesktop(void);
 static void updateclientlist(void);
+static void updateclientdesktop(Client *c);
 static int updategeom(void);
 static void updatenumlockmask(void);
 static void updatesizehints(Client *c);
@@ -564,7 +564,6 @@ cleanupmon(Monitor *mon)
 void
 clientmessage(XEvent *e)
 {
-	Arg arg;
 	XClientMessageEvent *cme = &e->xclient;
 	Client *c = wintoclient(cme->window);
 	unsigned int i;
@@ -1161,6 +1160,8 @@ manage(Window w, XWindowAttributes *wa)
 	arrange(c->mon);
 	XMapWindow(dpy, c->win);
 	focus(NULL);
+	/* set clients tag as current desktop (_NET_WM_DESKTOP) */
+	updateclientdesktop(c);
 }
 
 void
@@ -1793,6 +1794,7 @@ sendmon(Client *c, Monitor *m)
     detachstack(c);
 	c->mon = m;
 	c->tags = m->tagset[m->seltags]; /* assign tags of target monitor */
+	updateclientdesktop(c);
     attach(c);
     attachstack(c);
     focus(NULL);
@@ -2099,6 +2101,7 @@ tag(const Arg *arg)
 {
 	if (selmon->sel && arg->ui & TAGMASK) {
 		selmon->sel->tags = arg->ui & TAGMASK;
+		updateclientdesktop(selmon->sel);
 		focus(NULL);
 		arrange(selmon);
 	}

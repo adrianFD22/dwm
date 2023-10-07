@@ -7,8 +7,9 @@ static unsigned int snap      = 32;       /* snap pixel */
 static int showbar            = 1;        /* 0 means no bar */
 static int topbar             = 1;        /* 0 means bottom bar */
 static char font[]            = "monospace:size=10";
+static char font2[]           = "monospace:size=10";
 static char dmenufont[]       = "monospace:size=10";
-static const char *fonts[]          = { font };
+static const char *fonts[]          = { font, font2 };
 static char normbgcolor[]           = "#222222";
 static char normbordercolor[]       = "#444444";
 static char normfgcolor[]           = "#bbbbbb";
@@ -66,23 +67,24 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont,
  * Xresources preferences to load at startup
  */
 ResourcePref resources[] = {
-		{ "font",               STRING,  &font },
-		{ "dmenu.font",          STRING,  &dmenufont },
-		{ "normal.background",        STRING,  &normbgcolor },
-		{ "normal.boder",    STRING,  &normbordercolor },
-		{ "normal.foreground",        STRING,  &normfgcolor },
-		{ "selected.background",         STRING,  &selbgcolor },
-		{ "selected.border",     STRING,  &selbordercolor },
-		{ "selected.foreground",         STRING,  &selfgcolor },
-		{ "borderpx",          	INTEGER, &borderpx },
-		{ "snap",          		INTEGER, &snap },
-		{ "showbar",          	INTEGER, &showbar },
-		{ "topbar",          	INTEGER, &topbar },
-		{ "nmaster",          	INTEGER, &nmaster },
-		{ "resizehints",       	INTEGER, &resizehints },
-		{ "mfact",      	 	FLOAT,   &mfact },
-		{ "gappx",      	 	INTEGER,   &default_gappx },
-		{ "gappx",      	 	INTEGER,   &gappx },
+		{ "font",                   STRING,     &font },
+		{ "font2",                  STRING,     &font2 },
+		{ "dmenu.font",             STRING,     &dmenufont },
+		{ "normal.background",      STRING,     &normbgcolor },
+		{ "normal.boder",           STRING,     &normbordercolor },
+		{ "normal.foreground",      STRING,     &normfgcolor },
+		{ "selected.background",    STRING,     &selbgcolor },
+		{ "selected.border",        STRING,     &selbordercolor },
+		{ "selected.foreground",    STRING,     &selfgcolor },
+		{ "borderpx",          	    INTEGER,    &borderpx },
+		{ "snap",          		    INTEGER,    &snap },
+		{ "showbar",          	    INTEGER,    &showbar },
+		{ "topbar",          	    INTEGER,    &topbar },
+		{ "nmaster",          	    INTEGER,    &nmaster },
+		{ "resizehints",       	    INTEGER,    &resizehints },
+		{ "mfact",      	 	    FLOAT,      &mfact },
+		{ "gappx",      	 	    INTEGER,    &default_gappx },
+		{ "gappx",      	 	    INTEGER,    &gappx },
 };
 
 
@@ -106,6 +108,7 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_Return, spawn,          SHCMD( "st" ) },
 	{ MODKEY|ShiftMask,             XK_s,      spawn,          SHCMD( "systemctl suspend" ) },
 	{ MODKEY,                       XK_w,      spawn,          SHCMD( "qutebrowser" ) },
+	{ MODKEY,                       XK_o,      spawn,          SHCMD( "open-latex-proj" ) },
 	//{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
