@@ -6,6 +6,8 @@ My build of [dwm](https://dwm.suckless.org/).
 - [actualfullscreen](https://dwm.suckless.org/patches/actualfullscreen/)
 - [alwayscenter](https://dwm.suckless.org/patches/alwayscenter/)
 - [autostart](https://dwm.suckless.org/patches/autostart/)
+- [ewmhtags](https://dwm.suckless.org/patches/ewmhtags/)
+- [focusonnetactive](https://dwm.suckless.org/patches/focusonnetactive/)
 - [fullgaps](https://dwm.suckless.org/patches/fullgaps/)
 - [moveresize](https://dwm.suckless.org/patches/moveresize/)
 - [movestack](https://dwm.suckless.org/patches/movestack/)
