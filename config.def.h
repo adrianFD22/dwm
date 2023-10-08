@@ -109,6 +109,7 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_s,      spawn,          SHCMD( "systemctl suspend" ) },
 	{ MODKEY,                       XK_w,      spawn,          SHCMD( "qutebrowser" ) },
 	{ MODKEY,                       XK_o,      spawn,          SHCMD( "open-latex-proj" ) },
+	{ MODKEY,                       XK_m,      spawn,          SHCMD( "dmenu-monitor" ) },
 	//{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
