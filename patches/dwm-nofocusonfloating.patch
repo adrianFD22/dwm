@@ -1,0 +1,46 @@
+From bc1f9ab5a5d19e89dcd3f15f81e74ed67bd893b2 Mon Sep 17 00:00:00 2001
+From: adrianFD22 <adrianfd22399@gmail.com>
+Date: Wed, 6 Dec 2023 14:19:41 +0100
+Subject: [PATCH 1/1] Add no focus on floating windows
+
+---
+ dwm.c | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/dwm.c b/dwm.c
+index d55dc1e..8d0d0ee 100644
+--- a/dwm.c
++++ b/dwm.c
+@@ -862,7 +862,7 @@ void
+ focus(Client *c)
+ {
+ 	if (!c || !ISVISIBLE(c))
+-		for (c = selmon->stack; c && !ISVISIBLE(c); c = c->snext);
++		for (c = selmon->stack; c && (!ISVISIBLE(c) || (c->isfloating && !c->isfullscreen)); c = c->snext);
+ 	if (selmon->sel && selmon->sel != c)
+ 		unfocus(selmon->sel, 0);
+ 	if (c) {
+@@ -915,16 +915,16 @@ focusstack(const Arg *arg)
+ 	if (!selmon->sel || (selmon->sel->isfullscreen && lockfullscreen))
+ 		return;
+ 	if (arg->i > 0) {
+-		for (c = selmon->sel->next; c && !ISVISIBLE(c); c = c->next);
++		for (c = selmon->sel->next; c && (!ISVISIBLE(c) || (c->isfloating && !c->isfullscreen)); c = c->next);
+ 		if (!c)
+-			for (c = selmon->clients; c && !ISVISIBLE(c); c = c->next);
++			for (c = selmon->clients; c && (!ISVISIBLE(c) || (c->isfloating && !c->isfullscreen)); c = c->next);
+ 	} else {
+ 		for (i = selmon->clients; i != selmon->sel; i = i->next)
+-			if (ISVISIBLE(i))
++			if (ISVISIBLE(i) && !i->isfloating)
+ 				c = i;
+ 		if (!c)
+ 			for (; i; i = i->next)
+-				if (ISVISIBLE(i))
++				if (ISVISIBLE(i) && !i->isfloating)
+ 					c = i;
+ 	}
+ 	if (c) {
+-- 
+2.43.0
+
