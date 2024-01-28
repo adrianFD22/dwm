@@ -17,3 +17,6 @@ My build of [dwm](https://dwm.suckless.org/).
 - [sticky](https://dwm.suckless.org/patches/sticky/)
 - [togglefloatingcenter](https://dwm.suckless.org/patches/togglefloatingcenter/)
 - [xresources](https://dwm.suckless.org/patches/xresources/)
+
+## Bindings
+
