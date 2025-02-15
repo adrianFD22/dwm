@@ -33,7 +33,7 @@ static const Rule rules[] = {
 	/* class      instance    title       tags mask     isfloating   monitor */
 	/*{ "Gimp",     NULL,       NULL,       0,            0,           -1 },*/
 	{ "Xawtv",     NULL,       NULL,       0,            1,           -1 },
-	/*{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },*/
+	{ "qutebrowser",  NULL,       NULL,       1 << 8,       0,           -1 },
 };
 
 /* layout(s) */
@@ -98,7 +98,7 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_e,      spawn,          SHCMD( "dmenu-emoji" ) },
 	{ MODKEY,                       XK_f,      togglefullscr,  {0} },
-	{ MODKEY,                       XK_g,      spawn,          SHCMD( "dmenus" ) },
+	{ MODKEY,                       XK_m,      spawn,          SHCMD( "dmenus" ) },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_j,      movestack,      {.i = +1 } },
@@ -119,12 +119,12 @@ static const Key keys[] = {
 	//{ MODKEY,                       XK_w,      spawn,          SHCMD( "qutebrowser" ) },
 
     // Special keys
-	{ 0,                       XF86XK_MonBrightnessUp,      spawn,      SHCMD( "xbacklight -inc 5 && kill -38 $(pidof dwmblocks)" )},
-	{ 0,                       XF86XK_MonBrightnessDown,    spawn,      SHCMD( "xbacklight -dec 5 && kill -38 $(pidof dwmblocks)" )},
-	{ 0,                       XF86XK_AudioRaiseVolume,     spawn,      SHCMD( "pulsemixer --change-volume +5 --max-volume 100 && kill -39 $(pidof dwmblocks) ") },
-	{ 0,                       XF86XK_AudioLowerVolume,     spawn,      SHCMD( "pulsemixer --change-volume -5 --max-volume 100 && kill -39 $(pidof dwmblocks) ") },
-	{ 0,                       XF86XK_AudioMute,            spawn,      SHCMD( "pactl set-sink-mute @DEFAULT_SINK@ toggle && kill -39 $(pidof dwmblocks) ") },
-	{ 0,                       XF86XK_AudioMicMute,         spawn,      SHCMD( "pactl set-source-mute @DEFAULT_SOURCE@ toggle" ) },
+	{ 0,                       XF86XK_MonBrightnessUp,      spawn,      SHCMD( "incbacklight +5 && kill -38 $(pidof dwmblocks)" )},
+	{ 0,                       XF86XK_MonBrightnessDown,    spawn,      SHCMD( "incbacklight -5 && kill -38 $(pidof dwmblocks)" )},
+	{ 0,                       XF86XK_AudioRaiseVolume,     spawn,      SHCMD( "pulseaudio-ctl up && kill -39 $(pidof dwmblocks) ") },
+	{ 0,                       XF86XK_AudioLowerVolume,     spawn,      SHCMD( "pulseaudio-ctl down && kill -39 $(pidof dwmblocks) ") },
+	{ 0,                       XF86XK_AudioMute,            spawn,      SHCMD( "pulseaudio-ctl mute && kill -39 $(pidof dwmblocks) ") },
+	{ 0,                       XF86XK_AudioMicMute,         spawn,      SHCMD( "pulseaudio-ctl mute-input @DEFAULT_SOURCE@ toggle" ) },
 	{ 0,                       XF86XK_AudioPlay,            spawn,      SHCMD( "playerctl play-pause" ) },
 	{ 0,                       XF86XK_AudioPrev,            spawn,      SHCMD( "playerctl previous" ) },
 	{ 0,                       XF86XK_AudioNext,            spawn,      SHCMD( "playerctl next" ) },
